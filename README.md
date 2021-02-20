@@ -1,3 +1,3 @@
 # simple-memo-app
 
-Simple Memo App fro leaning Typescript
+Simple Memo App for leaning Typescript
