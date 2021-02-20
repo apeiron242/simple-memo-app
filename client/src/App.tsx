@@ -10,7 +10,8 @@ function App() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
 
-  const url = "";
+  const url = "http://localhost:3001";
+  // const url = ""
 
   Axios.defaults.withCredentials = true;
 
