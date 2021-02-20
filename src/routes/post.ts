@@ -35,7 +35,18 @@ router.post("/post", (req: express.Request, res: express.Response): void => {
         console.log(err);
         res.send("err");
       } else {
-        res.send("ok");
+        db.query(
+          "SELECT * FROM posts WHERE username = ?",
+          username,
+          (err, result) => {
+            if (err) {
+              console.log(err);
+              res.send("err");
+            } else {
+              res.send(result);
+            }
+          }
+        );
       }
     }
   );
@@ -48,6 +59,7 @@ router.delete(
 
     db.query(`DELETE FROM posts WHERE id = ${id}`, (err) => {
       if (err) {
+        console.log(err);
         res.send("err");
       } else {
         res.send("ok");

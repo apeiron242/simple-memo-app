@@ -23,13 +23,13 @@ const option = {
 const sessionStore = new MySQLStore(option);
 
 require("dotenv").config();
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "DELETE"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST", "DELETE"],
+//     credentials: true,
+//   })
+// );
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("client/build"));

@@ -25,8 +25,9 @@ function Posts({ isLogin, userId, url }: loginProps) {
         memo,
         userId,
       }).then((res: AxiosResponse): void => {
-        if (res.data === "ok") {
-          window.location.reload();
+        if (res.data !== "err") {
+          setPosts(res.data);
+          inputValue.current.value = "";
         } else {
           alert("Error Occured");
         }
@@ -72,7 +73,7 @@ function Posts({ isLogin, userId, url }: loginProps) {
     });
 
     console.log("render");
-  }, [isLogin, userId]);
+  }, [userId]);
 
   return (
     <div className="flex flex-col justify-center items-center m-2">
