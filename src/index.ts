@@ -4,7 +4,6 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import auth from "./routes/auth";
 import post from "./routes/post";
-import * as path from "path";
 
 declare module "express-session" {
   export interface SessionData {
@@ -13,7 +12,7 @@ declare module "express-session" {
 }
 
 const app: express.Application = express();
-const PORT: number = 3001 || process.env.PORT;
+const PORT = process.env.PORT || 3001;
 const MySQLStore = require("express-mysql-session")(session);
 const option = {
   user: process.env.user,
