@@ -23,7 +23,7 @@ function App() {
         console.log(response.data);
       }
     });
-  }, [isLogin]);
+  }, []);
 
   return (
     <div>

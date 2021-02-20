@@ -70,7 +70,7 @@ function Posts({ isLogin, userId, url }: loginProps) {
     Axios.get(url + `/post/${userId}`).then((res: AxiosResponse): void => {
       setPosts(res.data);
     });
-  }, [url, userId]);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center m-2">
