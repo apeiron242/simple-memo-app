@@ -17,6 +17,7 @@ function Headers({ isLogin, setIsLogin, userId, setUserId, url }: loginProps) {
       setIsLogin(false);
       setUserId("");
       Axios.post(url + "/logout");
+      window.location.reload();
     }
   };
   return (
@@ -25,13 +26,13 @@ function Headers({ isLogin, setIsLogin, userId, setUserId, url }: loginProps) {
         <h1 className="text-2xl">Simple-Memo-App</h1>
       </Link>
       {isLogin ? (
-        <div className="self-end justify-self-end pr-5 text-blue-400 text-lg m-1">
+        <div className="self-end justify-self-end pr-3 text-blue-400 text-lg m-1">
           <span onClick={logout}>{userId}</span>
         </div>
       ) : (
         <Link
           to="/login"
-          className="self-end justify-self-end pr-5 text-blue-400 text-lg m-1"
+          className="self-end justify-self-end pr-3 text-blue-400 text-lg m-1"
         >
           <span>Login</span>
         </Link>

@@ -1,18 +1,7 @@
 import express, { Router } from "express";
 import bcrypt from "bcrypt";
-import mysql from "mysql";
+import db from "../config/db";
 const router: Router = express.Router();
-
-require("dotenv").config();
-
-const option = {
-  user: process.env.user,
-  host: process.env.host,
-  database: process.env.database,
-  password: process.env.password,
-};
-
-const db: mysql.Connection = mysql.createConnection(option);
 
 router.post(
   "/register",
@@ -66,41 +55,43 @@ router.post("/login", (req: express.Request, res: express.Response): void => {
   const username: string = req.body.username;
   const password: string = req.body.password;
 
-  db.query(
-    "SELECT * FROM auth WHERE username = ?",
-    username,
-    async (err, result) => {
-      if (err) {
-        console.log(err);
-        res.send("err");
-      } else {
-        if (result) {
-          bcrypt.compare(
-            password,
-            result[0].password,
-            async (err, response) => {
-              if (err) {
-                console.log(err);
-              }
-              if (response) {
-                req.session.user = await result;
-                await req.session.save((err) => {
-                  if (err) {
-                    console.log(err);
-                  }
-                });
-                await res.send(result);
-              } else {
-                res.send("Wrong Username or Password");
-              }
-            }
-          );
+  if (password) {
+    db.query(
+      "SELECT * FROM auth WHERE username = ?",
+      username,
+      async (err, result) => {
+        if (err) {
+          console.log(err);
+          res.send("err");
         } else {
-          res.send("User doesn't exist");
+          if (result) {
+            bcrypt.compare(
+              password,
+              result[0].password,
+              async (err, response) => {
+                if (err) {
+                  console.log(err);
+                }
+                if (response) {
+                  req.session.user = await result;
+                  await req.session.save((err) => {
+                    if (err) {
+                      console.log(err);
+                    }
+                  });
+                  await res.send(result);
+                } else {
+                  res.send("Wrong Username or Password");
+                }
+              }
+            );
+          } else {
+            res.send("User doesn't exist");
+          }
         }
       }
-    }
-  );
+    );
+  }
 });
 
 router.post("/logout", (req: express.Request, res: express.Response): void => {

@@ -32,6 +32,11 @@ function Login({ isLogin, setIsLogin, userId, setUserId, url }: loginProps) {
         setIsLogin(true);
         setUserId(res.data[0].username);
         history.push("/");
+      } else {
+        console.log(res);
+        alert("username or password is not found");
+        setIsLogin(false);
+        setUserId("");
       }
     });
   };

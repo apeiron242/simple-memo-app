@@ -1,17 +1,6 @@
 import express, { Router } from "express";
-import mysql from "mysql";
+import db from "../config/db";
 const router: Router = express.Router();
-
-require("dotenv").config();
-
-const option = {
-  user: process.env.user,
-  host: process.env.host,
-  database: process.env.database,
-  password: process.env.password,
-};
-
-const db: mysql.Connection = mysql.createConnection(option);
 
 router.get("/post/:id", (req: express.Request, res: express.Response) => {
   const id: string = req.params.id;
