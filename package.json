@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "start": "pm2-runtime index.js -i max",
+    "start": "pm2-runtime public/index.js -i max",
     "prestart": "tsc",
     "dev": "nodemon src/index.ts"
   },
@@ -27,6 +27,10 @@
     "mysql": "^2.18.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5"
+  },
+  "engines": {
+    "node": "15.5.0",
+    "npm": "7.3.0"
   },
   "author": "",
   "license": "ISC",
